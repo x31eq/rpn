@@ -28,6 +28,12 @@ for token in tokens:
         stack.append(float(token))
     elif token == 'd':
         stack.append(stack[-1])
+    elif token == 'm':
+        m = []
+        while stack and  not isinstance(stack[-1], list):
+            m.append(stack.pop())
+        m.reverse()
+        stack.append(m)
     elif token == 'r':
         a = stack.pop()
         b = stack.pop()
@@ -38,14 +44,20 @@ for token in tokens:
     elif token == 'p':
         stack = [reduce(operator.mul, stack)]
     elif token in unary:
-        stack.append(unary[token](stack.pop()))
+        a = stack.pop()
+        if isinstance(a, list):
+            for each in a:
+                stack.append(unary[token](each))
+        else:
+            stack.append(unary[token](a))
     elif token in binary:
         b = stack.pop()
-        if stack:
-            stack.append(binary[token](stack.pop(), b))
+        a = stack.pop() if stack else 0
+        if isinstance(a, list):
+            for each in a:
+                stack.append(binary[token](each, b))
         else:
-            # Consistent with - as a unary operator
-            stack.append(binary[token](0, b))
+            stack.append(binary[token](a, b))
     else:
         raise SyntaxError("Bad token: " + token)
 
