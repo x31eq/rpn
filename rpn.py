@@ -32,9 +32,4 @@ for token in tokens:
     else:
         raise SyntaxError("Bad token: " + token)
 
-result = stack.pop()
-
-if result.denominator == 1:
-    print(stack.pop())
-else:
-    print("{} {}/".format(result.numerator, result.denominator))
+print(str(stack.pop()).replace('/', ':'))
