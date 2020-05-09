@@ -33,6 +33,10 @@ for token in tokens:
         b = stack.pop()
         stack.append(a)
         stack.append(b)
+    elif token == 's':
+        stack = [sum(stack)]
+    elif token == 'p':
+        stack = [reduce(operator.mul, stack)]
     elif token in unary:
         stack.append(unary[token](stack.pop()))
     elif token in binary:
@@ -42,10 +46,6 @@ for token in tokens:
         else:
             # Consistent with - as a unary operator
             stack.append(binary[token](0, b))
-    elif token == 's':
-        stack = [sum(stack)]
-    elif token == 'p':
-        stack = [reduce(operator.mul, stack)]
     else:
         raise SyntaxError("Bad token: " + token)
 
