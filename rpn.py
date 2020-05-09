@@ -3,7 +3,7 @@
 import fractions, math, operator, re, sys
 from functools import reduce
 
-operations = {
+binary = {
         '+': operator.add,
         '-': operator.sub,
         '*': operator.mul,
@@ -11,6 +11,8 @@ operations = {
         '^': pow,
         'l': math.log,
         }
+
+unary = {'f': float, 'i': int, 'q': math.sqrt}
 
 tokens = re.findall(r'[\d.:]+|\S', ' '.join(sys.argv[1:]))
 
@@ -26,22 +28,20 @@ for token in tokens:
         stack.append(float(token))
     elif token == 'd':
         stack.append(stack[-1])
-    elif token == 'f':
-        stack.append(float(stack.pop()))
-    elif token == 'q':
-        stack.append(math.sqrt(stack.pop()))
     elif token == 'r':
         a = stack.pop()
         b = stack.pop()
         stack.append(a)
         stack.append(b)
-    elif token in operations:
+    elif token in unary:
+        stack.append(unary[token](stack.pop()))
+    elif token in binary:
         b = stack.pop()
         if stack:
-            stack.append(operations[token](stack.pop(), b))
+            stack.append(binary[token](stack.pop(), b))
         else:
             # Consistent with - as a unary operator
-            stack.append(operations[token](0, b))
+            stack.append(binary[token](0, b))
     elif token == 's':
         stack = [sum(stack)]
     elif token == 'p':
