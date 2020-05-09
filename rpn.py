@@ -9,13 +9,16 @@ operations = {
         '/': operator.truediv,
         }
 
-tokens = re.findall(r'\d+|\S', ' '.join(sys.argv[1:]))
+tokens = re.findall(r'[\d:]+|\S', ' '.join(sys.argv[1:]))
 
 stack = []
 
 for token in tokens:
     if re.match('\d+$', token):
         stack.append(fractions.Fraction(token))
+    elif re.match('\d+:\d+$', token):
+        n, d = token.split(':')
+        stack.append(fractions.Fraction(int(n), int(d)))
     elif token == 'd':
         stack.append(stack[-1])
     elif token == 'r':
