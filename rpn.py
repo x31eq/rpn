@@ -11,7 +11,7 @@ operations = {
         '^': pow,
         }
 
-tokens = re.findall(r'[\d:]+|\S', ' '.join(sys.argv[1:]))
+tokens = re.findall(r'[\d.:]+|\S', ' '.join(sys.argv[1:]))
 
 stack = []
 
@@ -21,8 +21,12 @@ for token in tokens:
     elif re.match('\d+:\d+$', token):
         n, d = token.split(':')
         stack.append(fractions.Fraction(int(n), int(d)))
+    elif re.match('\d+.\d*$', token):
+        stack.append(float(token))
     elif token == 'd':
         stack.append(stack[-1])
+    elif token == 'f':
+        stack.append(float(stack.pop()))
     elif token == 'r':
         a = stack.pop()
         b = stack.pop()
