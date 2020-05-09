@@ -54,8 +54,12 @@ for token in tokens:
         b = stack.pop()
         a = stack.pop() if stack else 0
         if isinstance(a, list):
-            for each in a:
-                stack.append(binary[token](each, b))
+            if isinstance(b, list):
+                for each in map(binary[token], a, b):
+                    stack.append(each)
+            else:
+                for each in a:
+                    stack.append(binary[token](each, b))
         else:
             stack.append(binary[token](a, b))
     else:
