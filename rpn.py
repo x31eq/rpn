@@ -18,6 +18,11 @@ for token in tokens:
         stack.append(fractions.Fraction(token))
     elif token == 'd':
         stack.append(stack[-1])
+    elif token == 'r':
+        a = stack.pop()
+        b = stack.pop()
+        stack.append(a)
+        stack.append(b)
     elif token in operations:
         b = stack.pop()
         stack.append(operations[token](stack.pop(), b))
