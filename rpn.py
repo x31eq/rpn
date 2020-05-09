@@ -28,6 +28,8 @@ for token in tokens:
         stack.append(stack[-1])
     elif token == 'f':
         stack.append(float(stack.pop()))
+    elif token == 'q':
+        stack.append(math.sqrt(stack.pop()))
     elif token == 'r':
         a = stack.pop()
         b = stack.pop()
