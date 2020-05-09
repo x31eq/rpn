@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import fractions, operator, re, sys
+import fractions, math, operator, re, sys
 from functools import reduce
 
 operations = {
@@ -9,6 +9,7 @@ operations = {
         '*': operator.mul,
         '/': operator.truediv,
         '^': pow,
+        'l': math.log,
         }
 
 tokens = re.findall(r'[\d.:]+|\S', ' '.join(sys.argv[1:]))
