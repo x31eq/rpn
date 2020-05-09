@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import fractions, operator, re, sys
+from functools import reduce
 
 operations = {
         '+': operator.add,
@@ -31,6 +32,8 @@ for token in tokens:
         stack.append(operations[token](stack.pop(), b))
     elif token == 's':
         stack = [sum(stack)]
+    elif token == 'p':
+        stack = [reduce(operator.mul, stack)]
     else:
         raise SyntaxError("Bad token: " + token)
 
