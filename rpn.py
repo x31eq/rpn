@@ -29,6 +29,8 @@ for token in tokens:
     elif token in operations:
         b = stack.pop()
         stack.append(operations[token](stack.pop(), b))
+    elif token == 's':
+        stack = [sum(stack)]
     else:
         raise SyntaxError("Bad token: " + token)
 
