@@ -8,6 +8,7 @@ operations = {
         '-': operator.sub,
         '*': operator.mul,
         '/': operator.truediv,
+        '^': pow,
         }
 
 tokens = re.findall(r'[\d:]+|\S', ' '.join(sys.argv[1:]))
