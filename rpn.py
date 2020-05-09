@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/env python3
 
 import fractions, operator, re, sys
 
@@ -21,4 +21,9 @@ for token in tokens:
         b = stack.pop()
         stack.append(operations[token](stack.pop(), b))
 
-print(stack.pop())
+result = stack.pop()
+
+if result.denominator == 1:
+    print(stack.pop())
+else:
+    print("{} {}/".format(result.numerator, result.denominator))
