@@ -29,7 +29,11 @@ for token in tokens:
         stack.append(b)
     elif token in operations:
         b = stack.pop()
-        stack.append(operations[token](stack.pop(), b))
+        if stack:
+            stack.append(operations[token](stack.pop(), b))
+        else:
+            # Consistent with - as a unary operator
+            stack.append(operations[token](0, b))
     elif token == 's':
         stack = [sum(stack)]
     elif token == 'p':
