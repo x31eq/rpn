@@ -16,6 +16,8 @@ stack = []
 for token in tokens:
     if re.match('\d+$', token):
         stack.append(fractions.Fraction(token))
+    elif token == 'd':
+        stack.append(stack[-1])
     elif token in operations:
         b = stack.pop()
         stack.append(operations[token](stack.pop(), b))
