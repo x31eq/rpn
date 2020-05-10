@@ -12,7 +12,7 @@ binary = {
         'l': math.log,
         }
 
-unary = {'f': float, 'i': int, 'q': math.sqrt}
+unary = {'f': float, 'i': int, 'q': math.sqrt, 'v': math.sqrt}
 
 tokens = re.findall(r'[\d.:]+|\S', ' '.join(sys.argv[1:]))
 
