@@ -49,7 +49,12 @@ for token in tokens:
         if stack and isinstance(stack[-1], list):
             stack.append(reduce(operator.mul, stack.pop()))
         else:
-            stack = [reduce(operator.mul, stack or [Fraction(1, 1)])]
+            stack = [reduce(operator.mul, stack or [Fraction(1)])]
+    elif token == 't':
+        last = int(stack.pop())
+        first = int(stack.pop())
+        for i in range(first, last + 1):
+            stack.append(Fraction(i))
     elif token in unary:
         a = stack.pop()
         if isinstance(a, list):
