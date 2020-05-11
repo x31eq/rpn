@@ -41,9 +41,15 @@ for token in tokens:
         stack.append(a)
         stack.append(b)
     elif token == 's':
-        stack = [sum(stack)]
+        if stack and isinstance(stack[-1], list):
+            stack.append(sum(stack.pop()))
+        else:
+            stack = [sum(stack)]
     elif token == 'p':
-        stack = [reduce(operator.mul, stack or [Fraction(1, 1)])]
+        if stack and isinstance(stack[-1], list):
+            stack.append(reduce(operator.mul, stack.pop()))
+        else:
+            stack = [reduce(operator.mul, stack or [Fraction(1, 1)])]
     elif token in unary:
         a = stack.pop()
         if isinstance(a, list):
