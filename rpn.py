@@ -77,4 +77,9 @@ for token in tokens:
     else:
         raise SyntaxError("Bad token: " + token)
 
-print(str(stack.pop()).replace('/', ':'))
+if stack:
+    result = stack.pop()
+    if isinstance(result, list):
+        print(' '.join(str(item).replace('/', ':') for item in result))
+    else:
+        print(str(result).replace('/', ':'))
