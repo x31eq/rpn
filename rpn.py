@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-import fractions, math, operator, re, sys
+import math, operator, re, sys
+from fractions import Fraction
 from functools import reduce
 
 binary = {
@@ -20,10 +21,10 @@ stack = []
 
 for token in tokens:
     if re.match('\d+$', token):
-        stack.append(fractions.Fraction(token))
+        stack.append(Fraction(token))
     elif re.match('\d+:\d+$', token):
         n, d = token.split(':')
-        stack.append(fractions.Fraction(int(n), int(d)))
+        stack.append(Fraction(int(n), int(d)))
     elif re.match('\d+.\d*$', token):
         stack.append(float(token))
     elif token == 'd':
@@ -42,7 +43,7 @@ for token in tokens:
     elif token == 's':
         stack = [sum(stack)]
     elif token == 'p':
-        stack = [reduce(operator.mul, stack)]
+        stack = [reduce(operator.mul, stack or [Fraction(1, 1)])]
     elif token in unary:
         a = stack.pop()
         if isinstance(a, list):
