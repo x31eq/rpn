@@ -64,18 +64,7 @@ for token in tokens:
         for i in range(first, last + 1):
             stack.append(Fraction(i))
     elif token == 'c':
-        if stack:
-            if isinstance(stack[-1], list):
-                stack.append(len(stack[-1]))
-            else:
-                result = 0
-                for element in stack:
-                    result += 1
-                    if isinstance(element, list):
-                        result = 0
-                stack.append(result)
-        else:
-            stack.append(0)
+        stack.append(len(pop_vector(stack[:])))
     elif token in unary:
         a = stack.pop()
         if isinstance(a, list):
