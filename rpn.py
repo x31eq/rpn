@@ -24,12 +24,12 @@ tokens = re.findall(r'[\d.:]+|\S', ' '.join(sys.argv[1:]))
 stack = []
 
 for token in tokens:
-    if re.match('\d+$', token):
+    if re.match(r'\d+$', token):
         stack.append(Fraction(token))
-    elif re.match('\d+:\d+$', token):
+    elif re.match(r'\d+:\d+$', token):
         n, d = token.split(':')
         stack.append(Fraction(int(n), int(d)))
-    elif re.match('\d+.\d*$', token):
+    elif re.match(r'\d+.\d*$', token):
         stack.append(float(token))
     elif token == 'd':
         stack.append(stack[-1])
