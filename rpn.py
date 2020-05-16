@@ -71,8 +71,7 @@ for token in tokens:
     elif token in unary:
         a = stack.pop()
         if isinstance(a, list):
-            for each in a:
-                stack.append(unary[token](each))
+            stack.append(list(map(unary[token], a)))
         else:
             stack.append(unary[token](a))
     elif token in binary:
