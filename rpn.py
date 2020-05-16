@@ -4,6 +4,9 @@ import math, operator, re, sys
 from fractions import Fraction
 from functools import reduce
 
+def percent(n, d):
+    return float(n) / float(d) * 1e2
+
 binary = {
         '+': operator.add,
         '-': operator.sub,
@@ -11,6 +14,7 @@ binary = {
         '/': operator.truediv,
         '^': pow,
         'l': math.log,
+        '%': percent,
         }
 
 unary = {'f': float, 'i': int, 'q': math.sqrt, 'v': math.sqrt}
