@@ -54,3 +54,5 @@ test_output 65 1 10 tcjs
 test_output 0 c
 test_output 50 100tc/s
 test_output 50 100tmc/s
+test_output 12015 2 3 5m2l '12 19 28mr/c/s1000*i'
+test_output 18959 2 3 5m2l '19 30 44mr/c/s1000*i'
