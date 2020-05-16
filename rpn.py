@@ -60,7 +60,7 @@ for token in tokens:
         stack = [reduce(operator.mul, pop_vector(stack) or [Fraction(1)])]
     elif token == 't':
         last = int(stack.pop())
-        first = int(stack.pop())
+        first = int(stack.pop() if stack else 0)
         for i in range(first, last + 1):
             stack.append(Fraction(i))
     elif token == 'c':

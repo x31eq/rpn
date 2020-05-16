@@ -48,3 +48,4 @@ test_output 10 1 10 tc
 test_output 10 1 10 tmc
 test_output 65 1 10 tcs
 test_output 0 c
+test_output 50 100tmc/s
