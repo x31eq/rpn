@@ -19,6 +19,20 @@ binary = {
 
 unary = {'f': float, 'i': int, 'q': math.sqrt, 'v': math.sqrt}
 
+def pop_vector(stack):
+    """
+    Return a vector from the stack.
+    Also removes that return value from the stack.
+    """
+    if stack and isinstance(stack[-1], list):
+        return stack.pop()
+
+    result = []
+    while stack and not isinstance(stack[-1], list):
+        result.append(stack.pop())
+    result.reverse()
+    return result
+
 tokens = re.findall(r'[\d.:box]+|\S', ' '.join(sys.argv[1:]))
 
 stack = []
@@ -34,26 +48,16 @@ for token in tokens:
     elif token == 'd':
         stack.append(stack[-1])
     elif token == 'm':
-        m = []
-        while stack and  not isinstance(stack[-1], list):
-            m.append(stack.pop())
-        m.reverse()
-        stack.append(m)
+        stack.append(pop_vector(stack))
     elif token == 'r':
         a = stack.pop()
         b = stack.pop()
         stack.append(a)
         stack.append(b)
     elif token == 's':
-        if stack and isinstance(stack[-1], list):
-            stack.append(sum(stack.pop()))
-        else:
-            stack = [sum(stack)]
+        stack.append(sum(pop_vector(stack)))
     elif token == 'p':
-        if stack and isinstance(stack[-1], list):
-            stack.append(reduce(operator.mul, stack.pop()))
-        else:
-            stack = [reduce(operator.mul, stack or [Fraction(1)])]
+        stack = [reduce(operator.mul, pop_vector(stack) or [Fraction(1)])]
     elif token == 't':
         last = int(stack.pop())
         first = int(stack.pop())
