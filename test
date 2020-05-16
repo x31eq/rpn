@@ -36,7 +36,7 @@ test_output 5 1.1 1.2 1.3 1.4 1.5mis
 test_output 702 3 '2/2l1200*0.5+i'
 test_output 702 3:2 '2l1200*0.5+i'
 test_output 7 2 3 5 7m2lm0 5- 2 2 0 '1-m*s1200*i'
-test_output 225 2 3 5 7m2lm0 5- 2 2 0 1-m*s2r^224*0.0001+i
+test_output 225 2 3 5 7m2lm0 5- 2 2 0 '1-m*s2r^224*0.0001+i'
 test_output 33 1 3%i
 test_output '1 2 3 4' 1 2 3 4m
 test_output '1 2 3 4' 1 4tm
