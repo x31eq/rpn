@@ -45,8 +45,14 @@ for token in tokens:
         stack.append(Fraction(int(n), int(d)))
     elif re.match(r'\d+.\d*$', token):
         stack.append(float(token))
+    elif token == 'c':
+        stack.append(len(pop_vector(stack[:])))
     elif token == 'd':
         stack.append(stack[-1])
+    elif token == 'j':
+        a = pop_vector(stack)
+        b = pop_vector(stack)
+        stack.append(a + b)
     elif token == 'm':
         stack.append(pop_vector(stack))
     elif token == 'r':
@@ -61,10 +67,7 @@ for token in tokens:
     elif token == 't':
         last = int(stack.pop())
         first = int(stack.pop() if stack else 0)
-        for i in range(first, last + 1):
-            stack.append(Fraction(i))
-    elif token == 'c':
-        stack.append(len(pop_vector(stack[:])))
+        stack.append(list(map(Fraction, range(first, last + 1))))
     elif token in unary:
         a = stack.pop()
         if isinstance(a, list):
@@ -77,11 +80,9 @@ for token in tokens:
         a = stack.pop() if stack else 0
         if isinstance(a, list):
             if isinstance(b, list):
-                for each in map(binary[token], a, b):
-                    stack.append(each)
+                stack.append(list(map(binary[token], a, b)))
             else:
-                for each in a:
-                    stack.append(binary[token](each, b))
+                stack.append([binary[token](each, b) for each in a])
         else:
             stack.append(binary[token](a, b))
     else:
