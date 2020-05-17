@@ -68,6 +68,9 @@ for token in tokens:
         last = int(stack.pop())
         first = int(stack.pop() if stack else 0)
         stack.append(list(map(Fraction, range(first, last + 1))))
+    elif token == 'y':
+        jump = int(stack.pop())
+        stack.append(stack[-jump])
     elif token in unary:
         a = stack.pop()
         if isinstance(a, list):
