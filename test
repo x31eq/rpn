@@ -67,3 +67,5 @@ test_output 31 0o37
 test_output 3 2 3 4 2y
 test_output 710801 2 3 5m2ld12 19 28mr/r19 30 44mr/ \
                     '2yd*c/s2yd*c/s4y4y*c/s3y3y*2yd*-v1000000*i'
+test_output 2786246 2 3 5 7 11m2ld31 49 72 87 107mr/r41 65 95 115 142mr/ \
+                    '2yd*c/s2yd*c/s4y4y*c/s3y3y*2yd*-v1000000*i'
