@@ -50,8 +50,8 @@ for token in tokens:
     elif token == 'd':
         stack.append(stack[-1])
     elif token == 'j':
-        a = pop_vector(stack)
         b = pop_vector(stack)
+        a = pop_vector(stack)
         stack.append(a + b)
     elif token == 'm':
         stack.append(pop_vector(stack))
