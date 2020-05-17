@@ -65,3 +65,5 @@ test_output '12015576 18959244' 2 3 5m2ld12 19 28$TE r19 30 44$TE 'm1000000*i'
 test_output 31 0x1F
 test_output 31 0o37
 test_output 3 2 3 4 2y
+test_output 710801 2 3 5m2ld12 19 28mr/r19 30 44mr/ \
+                    '2yd*c/s2yd*c/s4y4y*c/s3y3y*2yd*-v1000000*i'
