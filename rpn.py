@@ -33,12 +33,12 @@ def pop_vector(stack):
     result.reverse()
     return result
 
-tokens = re.findall(r'[\d.:box]+|\S', ' '.join(sys.argv[1:]))
+tokens = re.findall(r'[\d.:boxA-F]+|\S', ' '.join(sys.argv[1:]))
 
 stack = []
 
 for token in tokens:
-    if re.match(r'(0[box])?\d+$', token):
+    if re.match(r'(0[box])?[\dA-F]+$', token):
         stack.append(Fraction(int(token, base=0)))
     elif re.match(r'\d+:\d+$', token):
         n, d = token.split(':')
