@@ -7,6 +7,9 @@ from functools import reduce
 def percent(n, d):
     return float(n) / float(d) * 1e2
 
+def bighex(n):
+    return '{:X}'.format(int(n))
+
 binary = {
         '+': operator.add,
         '-': operator.sub,
@@ -17,7 +20,11 @@ binary = {
         '%': percent,
         }
 
-unary = {'f': float, 'i': int, 'q': math.sqrt, 'v': math.sqrt}
+unary = {
+        'f': float, 'i': int,
+        'q': math.sqrt, 'v': math.sqrt,
+        'x': bighex,
+        }
 
 def pop_vector(stack):
     """
@@ -33,7 +40,7 @@ def pop_vector(stack):
     result.reverse()
     return result
 
-tokens = re.findall(r'[\d.:boxA-F]+|\S', ' '.join(sys.argv[1:]))
+tokens = re.findall(r'(?:0[box])?[\d.:A-F]+|\S', ' '.join(sys.argv[1:]))
 
 stack = []
 
