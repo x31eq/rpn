@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import math, operator, re, sys
+import math, operator, os, re, sys
 from fractions import Fraction
 from functools import reduce
 
@@ -99,6 +99,9 @@ def calculate(stack, commands):
 
 stack = []
 calculate(stack, ' '.join(sys.argv[1:]))
+suffix = os.getenv('RPN_SUFFIX')
+if suffix:
+    calculate(stack, suffix)
 
 if stack:
     result = stack.pop()
