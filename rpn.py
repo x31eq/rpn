@@ -46,7 +46,7 @@ def pop_vector(stack):
     return result
 
 def calculate(stack, commands):
-    tokens = re.findall(r'(?:0[box])?[\d.:A-F]+|\S', commands)
+    tokens = re.findall(r'(?:0[box])?[\d.:A-F]+(?:e[+-]?\d+)?|\S', commands)
 
     for token in tokens:
         if re.match(r'(0[box])?[\dA-F]+$', token):
@@ -54,7 +54,7 @@ def calculate(stack, commands):
         elif re.match(r'\d+:\d+$', token):
             n, d = token.split(':')
             stack.append(Fraction(int(n), int(d)))
-        elif re.match(r'\d+.\d*$', token):
+        elif re.match(r'\d+(.\d*)?(e[+-]?\d+)?$', token):
             stack.append(float(token))
         elif token == 'c':
             stack.append(len(pop_vector(stack[:])))
