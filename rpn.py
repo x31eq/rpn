@@ -18,6 +18,7 @@ binary = {
         '^': pow,
         'l': math.log,
         '%': percent,
+        '~': divmod,
         }
 
 unary = {
@@ -78,10 +79,6 @@ def calculate(stack, commands):
         elif token == 'y':
             jump = int(stack.pop())
             stack.append(stack[-jump])
-        elif token == '~':
-            b = stack.pop()
-            a = stack.pop()
-            stack[-1:] = divmod(a, b)
         elif token in unary:
             a = stack.pop()
             if isinstance(a, list):
@@ -97,7 +94,12 @@ def calculate(stack, commands):
                 else:
                     stack.append([binary[token](each, b) for each in a])
             else:
-                stack.append(binary[token](a, b))
+                result = binary[token](a, b)
+                if isinstance(result, tuple):
+                    for element in result:
+                        stack.append(element)
+                else:
+                    stack.append(result)
         else:
             raise SyntaxError("Bad token: " + token)
 
