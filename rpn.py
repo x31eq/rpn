@@ -78,6 +78,10 @@ def calculate(stack, commands):
         elif token == 'y':
             jump = int(stack.pop())
             stack.append(stack[-jump])
+        elif token == '~':
+            b = stack.pop()
+            a = stack.pop()
+            stack[-1:] = divmod(a, b)
         elif token in unary:
             a = stack.pop()
             if isinstance(a, list):
