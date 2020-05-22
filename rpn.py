@@ -10,6 +10,9 @@ def percent(n, d):
 def bighex(n):
     return '{:X}'.format(int(n))
 
+def inclusive(first, last):
+    return list(map(Fraction, range(int(first), int(last) + 1)))
+
 binary = {
         '+': operator.add,
         '-': operator.sub,
@@ -17,6 +20,7 @@ binary = {
         '/': operator.truediv,
         '^': pow,
         'l': math.log,
+        't': inclusive,
         '%': percent,
         '~': divmod,
         }
@@ -72,10 +76,6 @@ def calculate(stack, commands):
         elif token == 'p':
             product = reduce(operator.mul, pop_vector(stack) or [Fraction(1)])
             stack.append(product)
-        elif token == 't':
-            last = int(stack.pop())
-            first = int(stack.pop() if stack else 0)
-            stack.append(list(map(Fraction, range(first, last + 1))))
         elif token == 'y':
             jump = int(stack.pop())
             stack.append(stack[-jump])
