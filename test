@@ -73,3 +73,9 @@ test_output 2786246 2 3 5 7 11m2ld31 49 72 87 107mr/r41 65 95 115 142mr/
 export RPN_SUFFIX=pi
 test_output 123 1.23e-4 1e+6
 test_output 100 1e-4 1e6
+# Rounded base 60:
+export RPN_SUFFIX='0.5 3600/+60*60~60*60~im'
+test_output '1 2 3' 1 2 60/+ 3 60d*/+
+test_output '1 2 3' 1 2 60/+ 3 60d*/+f
+test_output '1 2 3' 1 2 60/+ 3.4 60d*/+
+test_output '1 2 4' 1 2 60/+ 3.5 60d*/+
