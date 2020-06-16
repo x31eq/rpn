@@ -104,7 +104,7 @@ def calculate(stack, commands):
             raise SyntaxError("Bad token: " + token)
 
 stack = []
-calculate(stack, ' '.join(sys.argv[1:]))
+calculate(stack, ' '.join(sys.argv[1:]).replace(',', ''))
 suffix = os.getenv('RPN_SUFFIX')
 if suffix:
     calculate(stack, suffix)
