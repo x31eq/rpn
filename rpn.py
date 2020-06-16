@@ -46,6 +46,7 @@ def pop_vector(stack):
     return result
 
 def calculate(stack, commands):
+    commands = commands.replace(',', '')
     tokens = re.findall(r'(?:0[box])?[\d.:A-F]+(?:e[+-]?\d+)?|\S', commands)
 
     for token in tokens:
@@ -104,7 +105,7 @@ def calculate(stack, commands):
             raise SyntaxError("Bad token: " + token)
 
 stack = []
-calculate(stack, ' '.join(sys.argv[1:]).replace(',', ''))
+calculate(stack, ' '.join(sys.argv[1:]))
 suffix = os.getenv('RPN_SUFFIX')
 if suffix:
     calculate(stack, suffix)
