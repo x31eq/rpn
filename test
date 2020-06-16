@@ -60,8 +60,8 @@ test_output '12015 18959' 2 3 5m2ld 12 19 28mr/c/sr'19 30 44mr/c/sm1000*i'
 test_output 12015 2 3 5m2l '12 19 28mr/2^c/sv1000*i'
 test_output 18959 2 3 5m2l '19 30 44mr/2^c/sv1000*i'
 TE=mr/2^c/sv
-test_output '12015576 18959244' 2 3 5m2ld12 19 28$TE r19 30 44$TE 'm1000000*i'
-test_output '12015576 18959244' 2 3 5m2ld12 19 28$TE r19 30 44$TE 'm1000000*i'
+test_output '12015576 18959244' 2 3 5m2ld12 19 28$TE r19 30 44$TE 'm1,000,000*i'
+test_output '12015576 18959244' 2 3 5m2ld12 19 28$TE r19 30 44$TE 'm1,000,000*i'
 test_output 31 0x1F
 test_output 31 0o37
 test_output 1F 0x1Fx
