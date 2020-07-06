@@ -94,6 +94,8 @@ def calculate(stack, commands):
                     stack.append(list(map(binary[token], a, b)))
                 else:
                     stack.append([binary[token](each, b) for each in a])
+            elif isinstance(b, list):
+                stack.append([binary[token](a, each) for each in b])
             else:
                 result = binary[token](a, b)
                 if isinstance(result, tuple):
