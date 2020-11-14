@@ -57,6 +57,10 @@ def calculate(stack, commands):
             stack.append(Fraction(int(n), int(d)))
         elif re.match(r'\d+(.\d*)?(e[+-]?\d+)?$', token):
             stack.append(float(token))
+        elif re.match(r'.\d+(e[+-]?\d+)?$', token):
+            # Two expressions are required for all variants of floats
+            # without matching the empty string
+            stack.append(float(token))
         elif token == 'c':
             stack.append(len(pop_vector(stack[:])))
         elif token == 'd':
