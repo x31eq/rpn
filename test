@@ -22,13 +22,26 @@ test_output 6 1 2 3p
 test_output 10 1 2 3 4s
 test_output 24 1 2 3 4p
 test_output 8:7 16:15 '15:14*'
+test_output 8:7 16:15 '15:14×'
 test_output 4:3 9:8 10:9 16:15p
 test_output 4:3 9 8/ 10 9/ 16 15/p
+test_output 4:3 9 8÷ 10 9÷ 16 15÷p
 test_output 4:3 9 8/10 9/16 15/p
 test_output 225:224 15:14 16:15/
 test_output 225:224 16:15 15:14r/
+test_output 225:224 16:15 15:14r÷
 test_output 1.5 3:2f
 test_output -3 3-
+test_output 1 2⁰
+test_output 2 2¹
+test_output 4 2²
+test_output 8 2³
+test_output 16 2⁴
+test_output 32 2⁵
+test_output 64 2⁶
+test_output 128 2⁷
+test_output 256 2⁸
+test_output 512 2⁹
 test_output 123 1.234 100*i
 test_output 2 '2qd*0.000000001+i'
 test_output 2 '2vd*0.000000001+i'

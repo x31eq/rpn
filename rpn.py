@@ -2,7 +2,7 @@
 
 import math, operator, os, re, sys
 from fractions import Fraction
-from functools import reduce
+from functools import partial, reduce
 
 def percent(n, d):
     return float(n) / float(d) * 1e2
@@ -16,8 +16,8 @@ def inclusive(first, last):
 binary = {
         '+': operator.add,
         '-': operator.sub,
-        '*': operator.mul,
-        '/': operator.truediv,
+        '*': operator.mul, '×': operator.mul,
+        '/': operator.truediv, '÷': operator.truediv,
         '^': pow,
         'l': math.log,
         't': inclusive,
@@ -27,9 +27,15 @@ binary = {
 
 unary = {
         'f': float, 'i': int,
-        'q': math.sqrt, 'v': math.sqrt,
+        'q': math.sqrt, 'v': math.sqrt, '√': math.sqrt,
         'x': bighex,
         }
+
+def revpow(x, y):
+    return pow(y, x)
+
+for i, exponent in enumerate('⁰¹²³⁴⁵⁶⁷⁸⁹'):
+    unary[exponent] = partial(revpow, i)
 
 def pop_vector(stack):
     """
