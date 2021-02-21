@@ -37,21 +37,30 @@ def revpow(x, y):
 for i, exponent in enumerate('⁰¹²³⁴⁵⁶⁷⁸⁹'):
     unary[exponent] = partial(revpow, i)
 
-def basestr(num, base):
+def basestr(num, base, precision=10):
     assert 1 < base <= 16
     if num == 0:
         return '0'
     result = ''
     negative = num < 0
-    num = abs(num)
-    while num:
+    num, frac = divmod(abs(num), 1)
+    while num > 0:
         num, digit = divmod(num, base)
         result = bighex(digit) + result
+    if frac:
+        fracstr = ''
+        for _ in range(precision):
+            frac *= base
+            fracstr += bighex(int(frac))
+            frac -= int(frac)
+        while fracstr[-1] == '0':
+            fracstr = fracstr[:-1]
+        result += '.' + fracstr
     return '-' + result if negative else result
 
 def stringify(item, properties):
     base = int(properties.get('output_base', 10))
-    if type(item) == int:
+    if type(item) in (int, float):
         return basestr(item, base)
     if type(item) == Fraction:
         n = basestr(item.numerator, base)
