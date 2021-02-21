@@ -49,6 +49,16 @@ def basestr(num, base):
         result = bighex(digit) + result
     return '-' + result if negative else result
 
+def stringify(item, properties):
+    base = int(properties.get('output_base', 10))
+    if type(item) == type(int):
+        return basestr(item, base)
+    if type(item) == Fraction:
+        n = basestr(item.numerator, base)
+        d = basestr(item.denominator, base)
+        return n if d == '1' else n + ':' + d
+    return str(item)
+
 def pop_vector(stack):
     """
     Return a vector from the stack.
@@ -63,7 +73,7 @@ def pop_vector(stack):
     result.reverse()
     return result
 
-def calculate(stack, commands):
+def calculate(stack, commands, properties):
     commands = commands.replace(',', '')
     tokens = re.findall(r'(?:0[box])?[\d.:A-F]+(?:e[+-]?\d+)?|\S', commands)
 
@@ -89,6 +99,8 @@ def calculate(stack, commands):
             stack.append(a + b)
         elif token == 'm':
             stack.append(pop_vector(stack))
+        elif token == 'o':
+            properties['output_base'] = stack.pop()
         elif token == 'r':
             a = stack.pop()
             b = stack.pop()
@@ -141,14 +153,15 @@ if args == '--test':
     sys.exit(0)
 
 stack = []
-calculate(stack, args)
+properties = {}
+calculate(stack, args, properties)
 suffix = os.getenv('RPN_SUFFIX')
 if suffix:
-    calculate(stack, suffix)
+    calculate(stack, suffix, properties)
 
 if stack:
     result = stack.pop()
     if isinstance(result, list):
-        print(' '.join(str(item).replace('/', ':') for item in result))
+        print(' '.join(stringify(item, properties) for item in result))
     else:
-        print(str(result).replace('/', ':'))
+        print(stringify(result, properties))
