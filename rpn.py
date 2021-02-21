@@ -37,6 +37,18 @@ def revpow(x, y):
 for i, exponent in enumerate('⁰¹²³⁴⁵⁶⁷⁸⁹'):
     unary[exponent] = partial(revpow, i)
 
+def basestr(num, base):
+    assert 1 < base <= 16
+    if num == 0:
+        return '0'
+    result = ''
+    negative = num < 0
+    num = abs(num)
+    while num:
+        num, digit = divmod(num, base)
+        result = bighex(digit) + result
+    return '-' + result if negative else result
+
 def pop_vector(stack):
     """
     Return a vector from the stack.
@@ -116,8 +128,20 @@ def calculate(stack, commands):
         else:
             raise SyntaxError("Bad token: " + token)
 
+def test():
+    import random
+    for each in range(1000):
+        num = random.randrange(-10_000, 10_000)
+        base = random.randrange(2, 17)
+        assert int(basestr(num, base), base) == num
+
+args = ' '.join(sys.argv[1:])
+if args == '--test':
+    test()
+    sys.exit(0)
+
 stack = []
-calculate(stack, ' '.join(sys.argv[1:]))
+calculate(stack, args)
 suffix = os.getenv('RPN_SUFFIX')
 if suffix:
     calculate(stack, suffix)
