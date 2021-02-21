@@ -51,7 +51,7 @@ def basestr(num, base):
 
 def stringify(item, properties):
     base = int(properties.get('output_base', 10))
-    if type(item) == type(int):
+    if type(item) == int:
         return basestr(item, base)
     if type(item) == Fraction:
         n = basestr(item.numerator, base)
