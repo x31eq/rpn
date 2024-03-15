@@ -53,9 +53,9 @@ def basestr(num, base, precision=10):
             frac *= base
             fracstr += bighex(int(frac))
             frac -= int(frac)
-        while fracstr[-1] == '0':
+        while fracstr and fracstr[-1] == '0':
             fracstr = fracstr[:-1]
-        result += '.' + fracstr
+        result += '.' + (fracstr or '0')
     return '-' + result if negative else result
 
 def stringify(item, properties):
