@@ -47,6 +47,7 @@ def basestr(num, base, precision=10):
     while num > 0:
         num, digit = divmod(num, base)
         result = bighex(digit) + result
+    result = result or '0'
     if frac:
         fracstr = ''
         for _ in range(precision):
