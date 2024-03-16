@@ -59,11 +59,12 @@ def basestr(num, base, precision=10):
 
 def stringify(item, properties):
     base = int(properties.get('output_base', 10))
+    precision = int(properties.get('precision', 10))
     if type(item) in (int, float):
-        return basestr(item, base)
+        return basestr(item, base, precision)
     if type(item) == Fraction:
-        n = basestr(item.numerator, base)
-        d = basestr(item.denominator, base)
+        n = basestr(item.numerator, base, precision)
+        d = basestr(item.denominator, base, precision)
         return n if d == '1' else n + ':' + d
     return str(item)
 
@@ -105,6 +106,8 @@ def calculate(stack, commands, properties):
             b = pop_vector(stack)
             a = pop_vector(stack)
             stack.append(a + b)
+        elif token == 'k':
+            properties['precision'] = stack.pop()
         elif token == 'm':
             stack.append(pop_vector(stack))
         elif token == 'o':
