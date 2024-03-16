@@ -86,6 +86,7 @@ test_output 64 100 16o
 test_output 277266780 123456789 9o
 test_output 11:12 8:9 7o
 test_output 1.3 1.5 6o
+test_output 1.4142 2q4k
 export RPN_SUFFIX='2yd*c/s2yd*c/s4y4y*c/s3y3y*2yd*-v1,000,000*i'
 test_output 710801 2 3 5m2ld12 19 28mr/r19 30 44mr/
 test_output 2786246 2 3 5 7 11m2ld31 49 72 87 107mr/r41 65 95 115 142mr/
