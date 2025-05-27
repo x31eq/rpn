@@ -31,6 +31,10 @@ unary = {
         'x': bighex,
         }
 
+constants = {
+        'π': math.pi,
+        }
+
 def revpow(x, y):
     return pow(y, x)
 
@@ -148,6 +152,8 @@ def calculate(stack, commands, properties):
                         stack.append(element)
                 else:
                     stack.append(result)
+        elif token in constants:
+            stack.append(constants[token])
         else:
             raise SyntaxError("Bad token: " + token)
 
