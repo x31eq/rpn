@@ -88,17 +88,17 @@ def pop_vector(stack):
 
 def calculate(stack, commands, properties):
     commands = commands.replace(',', '')
-    tokens = re.findall(r'(?:0[box])?[\d_.:A-F]+(?:e[+-]?\d+)?|\S', commands)
+    tokens = re.findall(r'(?:0[box])?[\d_.:A-F]+(?:e[+-]?[\d_]+)?|\S', commands)
 
     for token in tokens:
         if re.match(r'(0[box])?[\d_A-F]+$', token):
             stack.append(Fraction(int(token, base=0)))
-        elif re.match(r'\d+:\d+$', token):
+        elif re.match(r'[\d_]+:[\d_]+$', token):
             n, d = token.split(':')
             stack.append(Fraction(int(n), int(d)))
-        elif re.match(r'\d+(.\d*)?(e[+-]?\d+)?$', token):
+        elif re.match(r'[\d_]+(.[\d_]*)?(e[+-]?[\d_]+)?$', token):
             stack.append(float(token))
-        elif re.match(r'.\d+(e[+-]?\d+)?$', token):
+        elif re.match(r'.[\d_]+(e[+-]?[\d_]+)?$', token):
             # Two expressions are required for all variants of floats
             # without matching the empty string
             stack.append(float(token))

@@ -30,6 +30,8 @@ test_output 4:3 9 8/10 9/16 15/p
 test_output 225:224 15:14 16:15/
 test_output 225:224 16:15 15:14r/
 test_output 225:224 16:15 15:14r÷
+test_output 12 12_000:1000
+test_output 12 12,000:1000
 test_output 1.5 3:2f
 test_output -3 3-
 test_output 1 2⁰
@@ -87,6 +89,7 @@ test_output 64 100 16o
 test_output 277266780 123456789 9o
 test_output 277266780 123456789 9o
 test_output 277266780 123_456_789 9o
+test_output 277266780 123,456,789 9o
 test_output 11:12 8:9 7o
 test_output 1.3 1.5 6o
 test_output 1.4142 2q4k
@@ -96,7 +99,20 @@ export RPN_SUFFIX='2yd*c/s2yd*c/s4y4y*c/s3y3y*2yd*-v1,000,000*i'
 test_output 710801 2 3 5m2ld12 19 28mr/r19 30 44mr/
 test_output 2786246 2 3 5 7 11m2ld31 49 72 87 107mr/r41 65 95 115 142mr/
 export RPN_SUFFIX=pi
+test_output 123 123.000
+test_output 123 0,123.000
+test_output 123 0_123.000
+test_output 123 0.123e3
+test_output 123 .123_000e3
+test_output 123 .123,000e3
+test_output 123 .000_123_000e6
+test_output 123 .000,123,000e6
 test_output 123 1.23e-4 1e+6
+test_output 123 1,230e-7 1e+6
+test_output 123 1_230e-7 1e+6
+test_output 123 1,230.000e-7 1e+6
+test_output 123 1_230.000e-7 1e+6
+test_output 123 1_230.000e-7 1e+6
 test_output 100 1e-4 1e6
 # Rounded base 60:
 export RPN_SUFFIX='0.5 3600/+60*60~60*60~im'
