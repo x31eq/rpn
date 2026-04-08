@@ -87,10 +87,14 @@ def pop_vector(stack):
     return result
 
 def calculate(stack, commands, properties):
-    commands = commands.replace(',', '')
-    tokens = re.findall(r'(?:0[box])?[\d_.:A-F]+(?:e[+-]?[\d_]+)?|\S', commands)
+    tokens = re.findall(
+            r'(?:0[box])?[\d,_.:A-F]+(?:e[+-]?[\d,_]+)?|\S',
+            commands)
 
     for token in tokens:
+        # Commas aren't allowed in Python numbers,
+        # so strip them out here
+        token = token.replace(',', '')
         if re.match(r'(0[box])?[\d_A-F]+$', token):
             stack.append(Fraction(int(token, base=0)))
         elif re.match(r'[\d_]+:[\d_]+$', token):
