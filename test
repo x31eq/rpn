@@ -79,11 +79,14 @@ test_output 31 0x1F
 test_output 31 0o37
 test_output 1F 0x1Fx
 test_output F0 0xF0x
+test_output 16777216 0x100_00_00
 test_output 3 2 3 4 2y
 test_output '2 1 0' 1 2 3m3r-
 test_output 1000 .3 .7+1000*.1+i
 test_output 64 100 16o
 test_output 277266780 123456789 9o
+test_output 277266780 123456789 9o
+test_output 277266780 123_456_789 9o
 test_output 11:12 8:9 7o
 test_output 1.3 1.5 6o
 test_output 1.4142 2q4k
