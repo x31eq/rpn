@@ -21,6 +21,7 @@ test_output 6 1 2 3s
 test_output 6 1 2 3p
 test_output 10 1 2 3 4s
 test_output 24 1 2 3 4p
+test_output 8:7 8i7i/
 test_output 8:7 16:15 '15:14*'
 test_output 8:7 16:15 '15:14×'
 test_output 4:3 9:8 10:9 16:15p
