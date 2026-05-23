@@ -139,7 +139,11 @@ def calculate(stack, commands, properties):
             if isinstance(a, list):
                 stack.append(list(map(unary[token], a)))
             elif isinstance(a, Fraction) and a.is_integer():
-                stack.append(unary[token](int(a)))
+                result = unary[token](int(a))
+                if isinstance(result, int):
+                    stack.append(Fraction(result))
+                else:
+                    stack.append(result)
             else:
                 stack.append(unary[token](a))
         elif token in binary:
