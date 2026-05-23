@@ -29,6 +29,7 @@ unary = {
         'f': float, 'i': int,
         'q': math.sqrt, 'v': math.sqrt, '√': math.sqrt,
         'x': bighex,
+        '!': math.factorial,
         }
 
 constants = {
@@ -137,6 +138,8 @@ def calculate(stack, commands, properties):
             a = stack.pop()
             if isinstance(a, list):
                 stack.append(list(map(unary[token], a)))
+            elif isinstance(a, Fraction) and a.is_integer():
+                stack.append(unary[token](int(a)))
             else:
                 stack.append(unary[token](a))
         elif token in binary:
