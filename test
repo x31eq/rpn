@@ -97,6 +97,7 @@ test_output 1.4142 2q4k
 test_output 0.0 0.1 12^
 test_output 3.14159 π5k
 test_output 3628800 '10!'
+test_output 3,628,800 '10!,'
 test_output 98 '69!10li'
 test_output 100 '70!10li'
 test_output 70 '70!69!/'

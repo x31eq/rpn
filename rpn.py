@@ -10,6 +10,9 @@ def percent(n, d):
 def bighex(n):
     return '{:X}'.format(int(n))
 
+def commaformat(n):
+    return '{:,}'.format(int(n))
+
 def inclusive(first, last):
     return list(map(Fraction, range(int(first), int(last) + 1)))
 
@@ -30,6 +33,7 @@ unary = {
         'q': math.sqrt, 'v': math.sqrt, '√': math.sqrt,
         'x': bighex,
         '!': math.factorial,
+        ',': commaformat,
         }
 
 constants = {
@@ -93,20 +97,18 @@ def calculate(stack, commands, properties):
             commands)
 
     for token in tokens:
-        # Commas aren't allowed in Python numbers,
-        # so strip them out here
-        token = token.replace(',', '')
-        if re.match(r'(0[box])?[\d_A-F]+$', token):
-            stack.append(Fraction(int(token, base=0)))
-        elif re.match(r'[\d_]+:[\d_]+$', token):
+        if re.match(r'(0[box])?[\dA-F][\d,_A-F]*$', token):
+            stack.append(Fraction(int(token.replace(',', ''), base=0)))
+        elif re.match(r'\d[\d,_]*:\d[\d,_]*$', token):
             n, d = token.split(':')
-            stack.append(Fraction(int(n), int(d)))
-        elif re.match(r'[\d_]+(.[\d_]*)?(e[+-]?[\d_]+)?$', token):
-            stack.append(float(token))
-        elif re.match(r'.[\d_]+(e[+-]?[\d_]+)?$', token):
+            stack.append(Fraction(int(n.replace(',', '')),
+                                  int(d.replace(',', ''))))
+        elif re.match(r'\d[\d,_]*(.[\d,_]*)?(e[+-]?[\d,_]+)?$', token):
+            stack.append(float(token.replace(',', '')))
+        elif re.match(r'.\d[\d,_]*(e[+-]?[\d,_]*)?$', token):
             # Two expressions are required for all variants of floats
             # without matching the empty string
-            stack.append(float(token))
+            stack.append(float(token.replace(',', '')))
         elif token == 'c':
             stack.append(len(pop_vector(stack[:])))
         elif token == 'd':
@@ -166,7 +168,7 @@ def calculate(stack, commands, properties):
         elif token in constants:
             stack.append(constants[token])
         else:
-            raise SyntaxError("Bad token: " + token)
+            raise SyntaxError("Bad token: " + repr(token))
 
 def test():
     import random
