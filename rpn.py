@@ -29,7 +29,7 @@ binary = {
         }
 
 unary = {
-        'f': float, 'i': int,
+        'f': float, 'i': int, 'I': round,
         'q': math.sqrt, 'v': math.sqrt, '√': math.sqrt,
         'x': bighex,
         '!': math.factorial,
